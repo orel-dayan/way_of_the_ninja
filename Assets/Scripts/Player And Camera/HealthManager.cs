@@ -11,17 +11,13 @@ public class HealthManager : MonoBehaviour
     [SerializeField] int healthPoints = 5;
     [SerializeField] bool isReducingHealth = false;
     [SerializeField] float rhCooldown = 0.5f;
-    // Start is called before the first frame update
+
     void Start()
     {
         UpdateText();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
 
     public void AddHealth(int amount)
     {

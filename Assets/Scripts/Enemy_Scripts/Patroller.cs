@@ -25,7 +25,7 @@ public class Patroller : MonoBehaviour
     [SerializeField] private float timeToWaitAtTarget = 0;
 
     private NavMeshAgent navMeshAgent;
-   // [SerializeField] Animator animator;
+    // [SerializeField] Animator animator;
     private float rotationSpeed = 5f;
 
     private void Start()
@@ -40,7 +40,7 @@ public class Patroller : MonoBehaviour
 
     private void OnEnable()
     {
-      //  animator.Play("Base Layer.idle");
+        //  animator.Play("Base Layer.idle");
 
     }
 

@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+/*
+`* This component represents an event that is triggered when all enemies are killed.
+*/
 
 public class KillAllEnemiesEvent : Event
 {
     [SerializeField] Enemy[] enemies;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+   
     // Update is called once per frame
     void Update()
     {

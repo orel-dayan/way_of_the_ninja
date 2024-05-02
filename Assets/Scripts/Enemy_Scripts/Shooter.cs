@@ -8,10 +8,11 @@ using UnityEngine.UIElements;
  * This component represents an enemy NPC that chases the player.
  */
 [RequireComponent(typeof(NavMeshAgent))]
-public class Shooter: MonoBehaviour {
+public class Shooter : MonoBehaviour
+{
 
-    [Tooltip("The object that this enemy chases after")] [SerializeField]
-    GameObject player = null;
+    [Tooltip("The object that this enemy chases after")]
+    [SerializeField] GameObject player = null;
 
     [Header("These fields are for display only")]
     [SerializeField] private Vector3 playerPosition;
@@ -19,47 +20,61 @@ public class Shooter: MonoBehaviour {
     [SerializeField] SphereCollider personalSpace;
     [SerializeField] bool isInPersonalSpace = false;
 
-    [SerializeField] Animator animator;
+    private Animator animator;
     private NavMeshAgent navMeshAgent;
-
     [SerializeField] GameObject ninjaStarSpawner;
 
-    private void Start() {
+    private void Start()
+    {
         navMeshAgent = GetComponent<NavMeshAgent>();
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         //animator.enabled = false;
 
     }
 
-        private void OnEnable()
+private void OnEnable()
+{
+    if (ninjaStarSpawner != null)
     {
         ninjaStarSpawner.SetActive(true);
-        //navMeshAgent.SetDestination(this.transform.position);
-        
+    }
+    
+    if (animator != null)
+    {
         animator.Play("Base Layer.idle");
     }
-    void OnDisable() 
+    else
     {
-        ninjaStarSpawner.SetActive(false);
+        Debug.LogWarning("Animator component is not assigned on " + this.gameObject.name);
+    }
+}
 
+    void OnDisable()
+    {
+        if (ninjaStarSpawner != null)
+        {
+            ninjaStarSpawner.SetActive(false);
+        }
     }
 
-    private void Update() {
+    private void Update()
+    {
         playerPosition = player.transform.position;
-       // playerPosition.z = transform.position.z;
+        // playerPosition.z = transform.position.z;
         float distanceToPlayer = Vector3.Distance(playerPosition, transform.position);
         FacePlayer();
     }
 
-    private void FacePlayer() {
-      //  Vector3 direction = (playerPosition - transform.position).normalized;
-       // Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0 , direction.z));
+    private void FacePlayer()
+    {
+        //  Vector3 direction = (playerPosition - transform.position).normalized;
+        // Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0 , direction.z));
         // // transform.rotation = lookRotation;
-       // transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
+        // transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
 
         //my change:
         transform.LookAt(playerPosition);
-    
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -81,16 +96,18 @@ public class Shooter: MonoBehaviour {
     }
 
 
-    public bool IsTooClose() 
+    public bool IsTooClose()
     {
         return isInPersonalSpace;
     }
 
-    internal Vector3 TargetObjectPosition() {
+    internal Vector3 TargetObjectPosition()
+    {
         return player.transform.position;
     }
 
-    private void FaceDirection() {
+    private void FaceDirection()
+    {
         Vector3 direction = (navMeshAgent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         // transform.rotation = lookRotation;
