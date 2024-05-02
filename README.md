@@ -14,7 +14,7 @@ As a skilled ninja, you find yourself in the midst of a brutal invasion on your 
 
 ### Play on itch.io
 
-[Click here to play](https://gamedevcourseorelandmaor.itch.io/way-of-the-ninja)
+[Click here to play](https://oreldayan.itch.io/way-of-the-ninja)
 
 ## Key Features
 
